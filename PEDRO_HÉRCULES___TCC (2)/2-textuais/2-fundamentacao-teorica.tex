@@ -1,0 +1,249 @@
+\chapter{Fundamentação teórica}
+\label{cap:fundamentacao-teorica}
+\section{O jogo pôquer Texas Hold'Em}
+
+O pôquer possui várias modalidades, sendo algumas como o pôquer \textit{Head's Up}, que consiste em um contra um direto, sendo a modalidade mais famosa a \textit{Texas Hold'Em}, como falado por \citeonline{barbosa2005confiabilidade}, o pôquer é um jogo composto por muitos fatores, sendo os mais importantes para entende-lo: a hierarquia das cartas, a configuraçãoda modalidade, as combinações possíveis, as ações que o jogador pode tomar e a cronologia do jogo.
+
+\subsection{A hierarquia das cartas}
+
+Diferentemente dos jogos que envolvem o baralho, no pôquer, o ás é a carta de maior valor, sendo a seguinte hierarquia das cartas:
+
+\begin{enumerate}
+    \item Dois(2) \twos
+    \item Três(3) \tres
+    \item Quatro(4) \fours
+    \item Cinco(5) \fives
+    \item Seis(6) \sixs
+    \item Sete(7) \sevs
+    \item Oito(8) \eigs
+    \item Nove(9) \nines
+    \item Dez(10) \tens
+    \item Valete(J) \Js
+    \item Dama(Q) \Qs
+    \item Rei(K) \Ks
+    \item Ás (A) \As
+\end{enumerate}
+
+sendo essa a ordem crescente dos valores das cartas do pôquer, é importante destacar que o naipe não influencia no fator de valor das cartas, sendo assim, um 8 de espadas e um 8 de paus têm o mesmo valor.
+
+\subsection{A configuração da modalidade}
+
+No \textit{Texas Hold'Em} cada jogador recebe duas cartas aleatórias do baralho, que é o que chamado de ``mão'', sendo essas cartas que apenas o jogador tem acesso, enquanto isso, são distribuidas ao decorrer do jogo mais cinco cartas de forma comunitárias, as cartas comunitárias são cartas que todos os jogadores tem acesso e podem formar o jogos do pôquer.
+
+\subsection{As combinações possíveis}
+
+O principal objetivo do pôquer é formar combinações de cinco cartas, sendo um conjunto formado pelas duas cartas da mão do jogador com as cinco cartas comunitárias, sempre descartando as duas cartas de menor valor.
+
+As combinações do pôquer são as seguintes em ordem decrescente de força, sendo a primeira a mais forte e a última a mais fraca:
+
+\begin{itemize}
+    \item[\textit{Straight Flush}]
+          É a maior combinação do pôquer, que consiste em cinco cartas em sequência, sendo todas elas do mesmo naipe, dentro dela se encontra o maior jogo possível do pôquer, que é o \textit{Royal Straight Flush} que consiste na sequencia das maiores cartas, do dez até o ás, do mesmo naipe, que é a mostrada no exemplo abaixo:
+          \tenc \Jc \Qc \Kc \Ac
+    \item[]
+    \item[]
+\end{itemize}
+
+
+\section{Estatística e e o espaço de estados do Texas Hold'Em}
+
+De acordo com \citeonline{chen2006mathematics}, grande parte das decisões tomadas em uma partida de poquêr, vêm de condições que ainda não foram determinadas, ou seja, de informações que o agente não possui.
+
+É utilizado o exemplo da probabilidade de ser retirado aleatoriamente uma carta especifica do baralho, sendo que o mesmo possui 52 cartas, há uma chance $\frac{1}{52}$ de uma carta especifica ser retirada de forma aleatória.
+
+Também é possível tomar a quantidade de mãos possíveis no pré-flop, tendo em vista que são apenas duas cartas, podemos descrever como:
+
+$$\binom{52}{2} = \underbrace{1326}_\text{Combinações de cartas na mão do agente}$$
+
+O que gera 1326 possibilidades de combinações de cartas para cada jogador no pré-flop, enquanto as combinações possíveis de cartas comunitárias na mesa, cuja são 5 cartas, pode ser descrito como:
+
+$$\binom{52}{5} = \underbrace{2598960}_\text{combinações de cartas comunitárias possíveis}$$
+
+Além disso, existem mais variáveis que devem ser levadas em consideração pelo agente no poquêr, não apenas as próprias cartas, é necessário calcular quais as possíveis cartas dos outros agentes, as possíveis cartas a virem nas cartas comunitárias, a quantidade de fichas, tanto do próprio agente quanto a dos rivais, possibilidade de jogos serem formados, entre outros, tornando assim um espaço extremamente amplo de probabilidades.
+
+
+\section{Padrão MVC}
+
+A etapa de estruturação da \gls{API} tem como objetivo traduzir os elementos essenciais do jogo de pôquer --- incluindo jogadores, mãos, apostas e rodadas --- em componentes técnicos adequados ao desenvolvimento de sistemas computacionais. Essa conversão é realizada por meio da modelagem de objetos, definição de \textit{endpoints} e configuração de variáveis que representam o comportamento e as interações do jogo de forma programável e escalável.
+
+A arquitetura da \gls{API} é concebida segundo o modelo \gls{MVC}, um padrão arquitetural clássico de engenharia de software que promove a separação clara de responsabilidades, modularidade, coesão e baixo acoplamento entre componentes. Originado na década de 1970 por \citeonline{reenskaug1979}, o \gls{MVC} foi formalizado como um padrão de design no livro ``\textit{Design Patterns: Elements of Reusable Object-Oriented Software}'' \citeonline{gamma1994}, onde é descrito como uma estrutura tripartite para organizar código em aplicações interativas. Esse modelo divide a lógica da aplicação em três camadas interconectadas, mas independentes:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{lib/Arquitetura MVC.jpg}
+    \caption{Arquitetura MVC}
+    \label{fig:MVC}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{\textit{Model} (Modelo)}: Representa os dados e a lógica de negócios subjacente, independentemente de como eles são apresentados ou manipulados. No contexto desta API de pôquer, o \textit{Model} encapsula entidades como Jogador, Mão de Cartas, Aposta e Rodada, gerenciando regras do jogo (ex.: validação de apostas válidas, cálculo de probabilidades via Monte Carlo) e persistência de dados (ex.: banco de dados para histórico de mãos). O \textit{Model} notifica as outras camadas sobre mudanças de estado, garantindo que a integridade dos dados seja mantida sem interferência de interfaces ou controles. De acordo com \citeonline{gamma1994}, o \textit{Model} é ``o coração da aplicação'', focado em abstrações do domínio problemático, o que facilita testes unitários e reutilização em diferentes contextos.
+
+    \item \textbf{\textit{View} (Visão)}: Responsável pela apresentação e formatação dos dados para o usuário ou sistema externo, sem conter lógica de negócios. Em uma \gls{API} \textit{RESTful} como esta, a \textit{View} pode ser implementada como respostas \gls{JSON} formatadas (ex.: \textit{endpoint }\texttt{/jogo/\{id\}/estado} retornando o status atual da rodada em formato legível), templates \gls{HTML} para dashboards de simulação ou integrações com \textit{front-ends web}. A \textit{View} observa o \textit{Model} e se atualiza automaticamente via mecanismos de observador, conforme descrito no mesmo livro do \citeonline{gamma1994}. Isso assegura que alterações no \textit{Model} (ex.: nova aposta realizada) sejam refletidas imediatamente na saída, promovendo interfaces flexíveis e múltiplas \textit{views} para o mesmo conjunto de dados.
+
+    \item \textbf{\textit{Controller} (Controlador)}: Atua como intermediário, processando entradas do usuário (ex.: requisições \gls{HTTP} POST para ações como ``apostar'' ou ``fold'') e orquestrando interações entre \textit{Model} e \textit{View}. No pôquer AI, o \textit{Controller} gerencia fluxos como inicialização de rodadas, chamadas à rede neural para decisões e execução de simulações Monte Carlo, direcionando atualizações no \textit{Model} e renderizando a \textit{View} apropriada.
+          \citeonline{reenskaug1979} enfatizava que o \textit{Controller} ``interpreta comandos do usuário e atualiza o \textit{Model}'', evitando que a \textit{View} ou \textit{Model} lidem diretamente com inputs, o que reduz complexidade e facilita manutenção.
+\end{itemize}
+
+Essa tríade do \gls{MVC} permite ciclos unidirecionais eficientes: o usuário interage via \textit{Controller}, que modifica o \textit{Model}, que notifica a \textit{View} para atualização. Vantagens incluem escalabilidade (fácil adição de novas \textit{views}), testabilidade (camadas isoladas) e manutenção (mudanças em uma camada não afetam as outras), como validado em \textit{frameworks} modernos como \textit{Spring} \gls{MVC} (Java), Django (Python) e Laravel (PHP)\citeonline{rails2004}. Priorizando esses princípios, a arquitetura da \gls{API} define módulos específicos para o gerenciamento das etapas do jogo, execução de simulações Monte Carlo e integração com a rede neural para tomada de decisão e identificação de comportamentos automatizados. Essa estrutura modular isola funcionalmente cada componente --- \textit{Model} para lógica de pôquer, \textit{Controller} para \textit{endpoints} \gls{API} e \textit{View} para saídas, facilitando manutenção, depuração e expansões futuras.
+
+Além disso, a arquitetura proposta contempla mecanismos de interface entre as camadas \gls{MVC}, assegurando comunicação eficiente e intercâmbio consistente de dados entre simulação estatística e aprendizado de máquina. Foram adotadas práticas de normalização de dados, controle de versionamento de \textit{endpoints} (ex.: \texttt{/v1/jogo/\{id\}}) e injeção de dependências para acoplamento frouxo, garantindo estabilidade e compatibilidade.
+
+Essa etapa fundamenta a integridade técnica de todo o projeto, estabelecendo uma base sólida para fases subsequentes de testes, documentação e integração, ao mesmo tempo em que proporciona clareza estrutural e favorece a reprodutibilidade da pesquisa no contexto acadêmico.
+
+\section{Inteligência artificial e aprendizado por reforço}
+O termo inteligência artificial é extremamente amplo, o mesmo pode ser categorizado de várias maneiras diferentes, por exemplo: um inimigo que persegue o jogador em um jogo virtual é um tipo de inteligencia artificial. Mas o nicho que será abordado será o de \textit{Machine Learning}, que consiste em um sistema computacional aprender a executar uma ação, ou conjunto de ações, como é citado em \citeonline{sutton2018rl} pode ser entendido como uma criança aprendendo a brincar, ela faz movimentos aleatórios até entender quais movimentos se enquadram melhor para a brincadeira.
+Para isso tomamos o modelo de aprendizado, já que o mesmo se enquadra melhor para a criação de uma agente capaz de jogar o Texas Hold'Em, dito isto, o agente pode ser baseado em três tipos de aprendizado de máquina, como destacado em \citeonline{russell2010artificial}, sendo alguns deles os seguintes:
+\begin{itemize}
+    \item \textbf{Supervisionado:} O agente observa padrões e/ou entradas e saídas que são disponibilizadas para que o mesmo aprenda da melhor maneira como usar aqueles dados para executar suas ações;
+
+    \item \textbf{Não-supervisionado:} O agente trabalha sem necessariamente receber dados para complementar o modelo, como por exemplo um agente de tráfego de táxi, usando um modelo de aprendizado não supervisionado, ele pode usar diretrizes que o mesmo "percebeu" para ditar "Dias com tráfego bom" ou "Dias com tráfego ruim";
+
+    \item \textbf{Aprendizado por reforço:} O agente aprende por uma série de recompensas ou penalidades, como o agente utilizado neste trabalho é baseado em um aprendizado de máquina por reforço, a maneira do próprio receber as recompensas e punições é feita por conta das fichas do poquêr, sendo ganhar fichas uma recompensa e perder uma penalidade.
+
+\end{itemize}
+
+Tendo os diferentes tipos de aprendizado mencionados, e como dito acima, o selecionado para este trabalho é um aprendizado de máquina por reforço, dado tal explicação cabe explicar os componentes que compõem um aprendizado por reforço, sendo eles:
+
+\begin{itemize}
+    \item \textbf{O agente:} É a inteligência artificial propriamente dita, o agente toma as decisões baseadas no ambiente em que o mesmo está enquadrado;
+
+    \item \textbf{O ambiente:} Se trata de onde o agente vai trabalhar, no caso deste trabalho, se referencia à mesa de poquêr Texas Hold'Em, seguindo as regras estabelecidas do jogo;
+
+    \item \textbf{O estado:} Pode ser dito como os elementos que estão à disposição do agente, e que neste caso, são váriaveis dependendo do momento do ambiente, neste caso as fichas e as cartas tomam o papel de estado;
+
+    \item \textbf{A ação:} É definida como as ações que o agente pode tomar para obter o melhor resultado possivel, neste caso temos as seguintes ações: Fold, call e raise;
+
+    \item \textbf{A recompensa:} Como o aprendizado utilizado é o aprendizado por reforço, o sistema de recompensa é essencial para moldar o agente da melhor maneira possivel, no caso deste trabalho o sistema de recompensa se baseia no lucro ou prejuízo de fichas, sengo ganhar fichar uma recompensa, enquanto perder fichas, ou deixar de ganhar, gera uma penalidade.
+\end{itemize}
+
+\section{Método de Monte Carlo aplicado a uma rede neural jogadora de pôquer}
+
+O método de Monte Carlo é uma classe de técnicas numéricas baseadas em amostragem aleatória para estimar quantidades de interesse em problemas cuja solução analítica é inviável ou extremamente custosa. Historicamente, o método foi formalizado na década de 1940 no contexto do Projeto Manhattan em Los Alamos, quando Stanislaw Ulam e John von Neumann passaram a utilizar amostragens aleatórias para resolver problemas complexos de transporte de nêutrons e física nuclear, em substituição a cálculos combinatórios e integrais de alta dimensionalidade \citeonline{leonelli2021montecarlo}. O nome ``Monte Carlo'' foi sugerido por Nicholas Metropolis em referência ao famoso cassino de Mônaco, ressaltando a analogia com experimentos de sorteio e jogos de azar.
+
+De forma geral, o objetivo do método de Monte Carlo é aproximar uma quantidade esperada, como uma integral ou esperança matemática, por meio da média de amostras geradas aleatoriamente. Dado um vetor aleatório \(X\) com distribuição \(p(x)\) e uma função de interesse $ f(x) $, deseja-se estimar a esperança
+
+$$\mu = \mathbb{E}[f(X)] = \int f(x)\, p(x)\, dx$$
+
+Em muitos casos, essa integral não admite forma fechada ou é impraticável de calcular diretamente, especialmente em espaços de alta dimensão. O método de Monte Carlo substitui então essa integral pela média amostral
+$$\hat{\mu}_N = \frac{1}{N} \sum_{i=1}^{N} f(X_i)$$
+em que \(X_1, X_2, \dots, X_N\) são amostras independentes e identicamente distribuídas segundo \(p(x)\). Pelo Teorema da Lei dos Grandes Números, \(\hat{\mu}_N\) converge quase certamente para \(\mu\) quando \(N \to \infty\), e o Erro Padrão da estimativa diminui aproximadamente com a ordem de \(1/\sqrt{N}\) \cite{rubinstein2008simulation}. Essa propriedade torna o método de Monte Carlo particularmente útil para problemas de alta complexidade, onde métodos determinísticos teriam custo proibitivo.
+
+Do ponto de vista prático, um algoritmo básico de Monte Carlo para estimar \(\mu\) pode ser descrito em três passos \cite{rubinstein2008simulation}:
+\begin{enumerate}
+    \item Gerar \(N\) amostras pseudoaleatórias \(X_1, X_2, \dots, X_N\) a partir da distribuição alvo \(p(x)\) ou de uma distribuição equivalente (por exemplo, via transformações, amostragem por rejeição ou métodos de cadeia de Markov).
+    \item Avaliar a função de interesse \(f(X_i)\) para cada amostra gerada.
+    \item Calcular a média amostral \(\hat{\mu}_N\) como estimativa da quantidade de interesse, juntamente com estimativas de variância e intervalos de confiança.
+\end{enumerate}
+Rubinstein e Kroese destacam que, embora o método seja conceitualmente simples, boa parte da pesquisa em Monte Carlo concentra-se em aprimorar a geração de amostras e reduzir a variância das estimativas (por exemplo, via amostragem estratificada, variáveis antitéticas ou amostragem por importância) \citeonline{rubinstein2008simulation}.
+
+\subsection{Aplicação do método de Monte Carlo em jogos e pôquer}
+
+Jogos de cartas como o pôquer são domínios clássicos para aplicação de Monte Carlo, pois envolvem incerteza combinatória (cartas ocultas, cartas futuras), múltiplos agentes e grandes espaços de estados. Em pôquer Texas Hold'em, por exemplo, um jogador conhece apenas suas cartas privadas e as cartas comunitárias já reveladas, mas desconhece as cartas dos oponentes e as cartas que ainda serão abertas. Isso torna difícil calcular exatamente a probabilidade de vitória ou o valor esperado de uma ação (pagar, aumentar, desistir) em tempo real.
+
+O método de Monte Carlo é empregado para contornar essa dificuldade por meio de simulações do futuro da mão. A ideia básica é:
+\begin{enumerate}
+    \item Fixar o estado atual da mão: cartas próprias do agente, cartas comunitárias já reveladas, ações anteriores dos jogadores e tamanho dos potes.
+    \item Amostrar aleatoriamente, muitas vezes, as cartas ocultas dos oponentes e as cartas futuras que ainda serão reveladas, respeitando o baralho remanescente (ou seja, sem reposição e sem conflitos com cartas já visíveis).
+    \item Para cada cenário simulado, completar a mão até o final (showdown ou desistências) e avaliar o resultado: vitória, derrota, empate, lucro ou prejuízo monetário.
+    \item Estimar, por meio da média dos resultados simulados, a probabilidade de vitória ou o valor monetário esperado (EV) de uma ação específica.
+\end{enumerate}
+
+Diversos trabalhos em pôquer computacional adotam variações desse esquema, tanto para avaliar a força de uma mão quanto para apoiar decisões estratégicas \citeonline{kleij2010thesis,vdBroeck2009mcts,heuristic2015poker}. Por exemplo, Van der Kleij construiu um jogador de pôquer computacional que utiliza busca em árvore por Monte Carlo, \gls{MCTS}, combinada com modelagem de oponentes para estimar valores esperados de ações em diferentes estágios do jogo \citeonline{kleij2010thesis}. Em outro estudo, Van den Broeck e colaboradores aplicam \gls{MCTS} em pôquer no-limit, utilizando simulações para explorar o espaço de decisões possíveis e discretizar tamanhos de aposta, reduzindo o custo computacional sem perder competitividade \cite{vdBroeck2009mcts}. Esses trabalhos demonstram que, mesmo em jogos de informação imperfeita, o uso sistemático de simulações aleatórias permite aproximar o valor das ações de forma eficaz.
+
+Em contextos mais heurísticos, Monte Carlo também é amplamente utilizado para validar estratégias ou heurísticas de decisão em pôquer. Por exemplo, estudos utilizam simulações de centenas de milhares ou milhões de mãos para estimar a probabilidade de ocorrência de determinados tipos de mãos ou para verificar o desempenho de regras fixas de jogo ao longo do tempo \citeonline{heuristic2015poker}. Essa mesma lógica de simulação extensiva é diretamente aproveitada em arquiteturas de inteligência artificial, nas quais a estimativa robusta de probabilidades e valores esperados é um insumo fundamental para o treinamento de modelos.
+
+\subsection{Integração do método de Monte Carlo com redes neurais para pôquer}
+
+No contexto desta pesquisa, o método de Monte Carlo é empregado como um mecanismo de estimação estatística que gera alvos ou sinais de treinamento para uma rede neural projetada para jogar pôquer. A integração entre Monte Carlo e aprendizado de máquina segue a linha de trabalhos em aprendizado por reforço (Reinforcement Learning), nos quais estimativas de retorno obtidas a partir de episódios completos são utilizadas para atualizar funções de valor e políticas.
+
+Em termos conceituais, a rede neural recebe como entrada uma representação de estado do jogo (por exemplo, codificação das cartas próprias, cartas comunitárias, posição na mesa, tamanho dos potes, histórico recente de apostas e características dos oponentes) e produz como saída:
+\begin{itemize}
+    \item estimativas de valor, representando o valor esperado da posição atual (por exemplo, em unidades monetárias ou em probabilidade de vitória); e/ou
+    \item distribuições de probabilidade sobre ações (por exemplo, dobrar, pagar, aumentar), representando uma política estocástica de jogo.
+\end{itemize}
+Para treinar essa rede, o método de Monte Carlo é utilizado em duas frentes principais:
+
+\subsubsection{Geração de rótulos (targets) a partir de simulações}
+
+Uma abordagem direta consiste em usar simulações de Monte Carlo para rotular estados com estimativas de valor ou probabilidade de vitória. O procedimento típico é:
+\begin{enumerate}
+    \item Selecionar um conjunto de estados de pôquer (reais ou gerados artificialmente).
+    \item Para cada estado, executar um grande número de simulações Monte Carlo, amostrando cartas ocultas dos oponentes e cartas futuras, e jogando a mão até o fim sob uma política fixa ou sob um modelo de oponentes.
+    \item Calcular, para cada estado, a média dos resultados simulados (por exemplo, lucro líquido médio ou probabilidade estimada de vitória).
+    \item Utilizar esses valores médios como alvos supervisionados para treinar a rede neural, minimizando uma função de perda adequada (como erro quadrático médio para valores ou entropia cruzada para probabilidades).
+\end{enumerate}
+Essa estratégia transforma o problema em um cenário de aprendizado supervisionado onde Monte Carlo fornece um ``professor estatístico'' para a rede, à semelhança do que \citeonline{sutton2018rl} discutem para métodos de Monte Carlo em aprendizado por reforço, nos quais o retorno total observado em um episódio serve como alvo para a função de valor.
+
+\subsubsection{Métodos de Monte Carlo em aprendizado por reforço}
+
+Outra forma de integração é empregar diretamente métodos de Monte Carlo em aprendizagem por reforço, em que a própria interação da rede com um ambiente simulador de pôquer gera episódios de jogo. Nesse cenário:
+\begin{itemize}
+    \item Cada episódio corresponde a uma sequência de estados, ações e recompensas (por exemplo, ganhos e perdas em fichas).
+    \item Ao final do episódio, calcula-se o retorno total \(G_t\) a partir de cada estado \(s_t\):
+          $$G_t = \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k,$$
+          em que \(R_k\) é a recompensa na etapa \(k\), \(\gamma \in [0, 1]\) é o fator de desconto e \(T\) é o tempo final do episódio.
+    \item Esses retornos \(G_t\) são utilizados para atualizar os parâmetros da rede, seja como alvos para uma função de valor \(V(s)\), seja como sinal de reforço para ajustar uma política parametrizada \(\pi_\theta(a|s)\).
+\end{itemize}
+\citeonline{sutton2018rl} mostram que tais métodos de Monte Carlo permitem aprender diretamente a partir da experiência, sem a necessidade de um modelo completo das dinâmicas do ambiente, o que é particularmente atraente em domínios complexos como o pôquer, em que a modelagem exata dos oponentes e das distribuições de cartas é difícil. Na prática, pode-se combinar simulações de Monte Carlo com técnicas como busca em árvore \gls{MCTS} ou amostragem de políticas para explorar as consequências de diferentes ações antes de atualizá-las na rede neural.
+
+\subsection{Aspectos práticos e considerações metodológicas}
+
+A aplicação do método de Monte Carlo em pôquer associado a redes neurais envolve algumas decisões metodológicas importantes:
+\begin{itemize}
+    \item \textbf{Número de simulações (\(N\))}: Há um compromisso entre custo computacional e precisão estatística. Valores de \(N\) muito baixos resultam em estimativas ruidosas, enquanto valores muito altos aumentam o tempo de treinamento. Em geral, escolhe-se \(N\) de forma a garantir erros padrão aceitáveis para as estimativas de valor, muitas vezes com base em experimentos preliminares como dito por \citeonline{rubinstein2008simulation}.
+    \item \textbf{Modelagem de oponentes}: Em jogos de informação imperfeita, as simulações devem refletir crenças realistas sobre o comportamento dos oponentes. Trabalhos em pôquer computacional utilizam modelos paramétricos de oponentes, aprendidos a partir de dados, para amostrar ações e cartas de forma consistente com estilos de jogo observados por \citeonline{kleij2010thesis,vdBroeck2009mcts}.
+    \item \textbf{Representação de estados}: A qualidade das estimativas de Monte Carlo depende também da expressividade da representação utilizada na rede neural. Entradas que resumem adequadamente a informação relevante (por exemplo, tamanhos relativos de pilha, posição, textura do bordo e histórico de ações) favorecem o aprendizado de padrões estáveis a partir dos retornos simulados.
+    \item \textbf{Redução de variância}: Técnicas clássicas de redução de variância podem ser adaptadas ao contexto de pôquer, por exemplo, estratificando simulações por tipo de mão inicial ou por determinadas configurações de bordo, de modo a obter estimativas mais precisas sem necessariamente aumentar \(N\) como notado por \citeonline{rubinstein2008simulation}.
+\end{itemize}
+
+Dessa forma, o método de Monte Carlo não é apenas um componente auxiliar, mas um elemento estruturante da metodologia, fornecendo a base estatística para a estimativa de probabilidade de vitória, valor esperado de ações e retornos de aprendizado por reforço. Essa integração favorece uma abordagem reprodutível e sistemática para o desenvolvimento de uma rede neural jogadora de pôquer, alinhada com práticas consolidadas na literatura de simulação e aprendizado por reforço.
+
+\section{Redes neurais artificiais e Q-Learning}
+
+Uma \gls{RNA} emula o funcionamento do cerébro humano, neste aspecto, há varias formas de moldar uma \gls{RNA}, a que será citada será uma rede neural artificial perceptron multicamadas, como dito em \citeonline{bengio2017deep}, a mesma pode ser definida como uma função que mapeia um conjunto de entradas e retorna uma saída, utilizando para isso, neurônios, que servem para definir as saídas baseadas nas entradas, pesos, que são paramêtros passados para os neurônios para tomarem a melhor decisão e funções de ativação que, como o nome se refere, ativa os neurônios.
+
+O Q-Learning é um algoritmo de reforço que consiste em dar \textit{Q-Values}(valores de qualidade) para uma determinada ação da rede, considerando assim se vale ou não a pena tomar aquela decisão. O Q-Learning trabalha usando a Q-Table, que consiste em uma tabela que suas linhas são todos os estados possíveis do jogo, enquanto as colunas são todas as ações possíveis, a rede verifica o estado e confere qual ação tem o maior Q-Value e executa a devida ação.
+
+Para calcular o valor ideal do Q-Value, como citado por \citeonline{mnih2015human},é utilizada a fórmula de Bellman, cuja é a seguinte:
+$$Q_{i+1}(s, a) = r + \gamma \max Q_i(s', a')$$
+Tal fórmula calcula o Q-Value, cada termo significa o seguinte:
+\begin{itemize}
+    \item $Q_{i+1}(s, a)$: Significa o valor a ser calculado, onde o \textit{s} representa o estado que o agente se encontra, enquanto o \textit{a} representa a ação a ser tomada, o \textit{i+1} representa o novo valor a ser adicionado;
+    \item \textit{r}: Representa a recompensa imediata por tomar tal ação;
+    \item $\gamma$: Representa o fator de desconto, variando entre 0 e 1, sendo 0 quando o agente leva em consideração apenas a recompensa imediata(\textit{r});
+    \item $\max Q_i(s', a')$: Esta função representa o maior Q-Value possível, tomando o estado futuro (\textit{s'}) tomando a melhor ação possível (\textit{a'}).
+\end{itemize}
+
+Entretanto um algoritmo de Q-Learning tradicional funciona perfeitamente com jogos mais simples e com menos ações e estados a serem verificados, jogos como jogo da velha ou labirintos são exemplos simples para se utilizar o Q-Learning tradicional, porém o Texas Hold'Em, por conta da quantidade de combinações de cartas, tamanho do pote, quantidade de fichas do jogador e ações a serem tomadas, criaria uma tabela que beiraria a infinidade de estados que poderiam ser tomados, tornando ineficaz e praticamente impossível a criação de uma Q-Table para um jogo de pôquer, tendo em vista que nenhum computador moderno teria capacidade de memória para alocar uma tabela tão extensa.
+
+
+\section{Deep Q-Network}
+O Deep Q-Network é uma variação do algoritmo de Q-Leaning padrão, o mesmo é usado quando a quantidade de estados beira o infinito, já que o mesmo usa de uma rede neural para fazer a predição do Q-Value.
+
+Como citado anteriormente, esta abordagem não é eficiente já que é calculada sem nenhuma generalização, sendo assim, o Deep Q-Network foi criado para que fosse possível que a rede neural fizesse a predição sem necessidade de criar uma tabela grande demais até mesmo para ser alocada na memória, assim podendo usar uma equação para se calcular o valor aproximado do Q-Value, usando a equação:
+
+$$L_i(\theta_i) = \mathbb{E}_{\underbrace{(s,a,r,s') \sim U(D)}_{\text{Exp. Replay}}} \left[ \left( r + \gamma \underbrace{\max_{a'}}_{\text{Alvo}} Q(s', a'; \theta_i^-) - \underbrace{Q(s, a; \theta_i)}_{\text{Predição}} \right)^2 \right]$$
+
+Esta é uma fórmula de perda, descrita por \citeonline{mnih2015human}, que pode ser desmembrada e entendida como:
+
+\begin{itemize}
+    \item $L_i(\theta_i)$: é a taxa de perda na iteração \textit{i}, considerando os pesos atuais $\theta_i$ da rede neural;
+    \item  $ \mathbb{E}_{(s,a,r,s') \sim U(D)} $: Se refere ao \textit{Experience Replay}, que são jogos anteriores guardados na memória;
+    \item $ r + \gamma {\max_{a'}} Q(s', a'; \theta_i^-)$: É a equação de Bellman, porém utilizando iterações passadas otimizadas pela fórmula de perda, representadas por $\theta_i^-$, sendo utilizada como alvo;
+    \item $ Q(s, a; \theta_i) $: Representa a predição feita de forma cega pelo agente, utilizando os pesos $\theta_i$;
+    \item Sendo a diferença entre o alvo e a predição elevados ao quadrado, para evitar números negativos, e dar maior peso a resultados ruins.
+\end{itemize}
+
+O Deep Q-Network foi desenvolvido por \citeonline{mnih2015human} para ensinar uma Inteligencia artificial para jogar Atari, tornando-se um marco histórico para o desenvolvimento de Redes Neurais utilizando o Q-Learning.
+
+\section{Exploração vs. Explotação (Epsilon-Greedy)}
+
+O agente necessita aferir a melhor jogada possível do Texas Hold'Em, para isso ele deve explorar suas opções de jogada, o mesmo inicialmente não tem conhecimento para determinar a melhor jogada possível, logo o agente deve escolher aleatoriamente sua jogada, antes de conseguir explotar as melhores jogadas possíveis.
+
+Para isso, foi usada a tática \textit{$\epsilon$ -Greedy}(Epsilon-Guloso), como descrita em \citeonline{sutton2018rl}, o $\epsilon$ -Greedy consiste em uma tática em que o coeficiente de exploração $\epsilon$ determina a aleatoriedade das ações, no caso deste trabalho, o mesmo é iniciado em 1.0, determinando exploração total, ou seja, uma ação completamente aleatória, que vai decaindo ao decorrer das jogadas, chegando próximo de 0.0, assim maximizando a explotação.
+
+\section{Replay de Experiência (Experience Replay)}
+
+Pela extensa quantidade de estados que o Texas Hold'Em pode tomar, alguns estados se tornam semelhantes entre si, o que pode ocasionar um ótimo local para a Rede Neural, isso é denotado por \citeonline{mnih2015human}, quando é citado que casos semelhantes "viciam" nas ações, tornando o agente enviesado.
+
+Para contornar este problema foi utilizado o \textit{Experience Replay}(Replay de experiência), também citado em \citeonline{mnih2015human}, o Experience Replay consiste em criar lotes de memórias aleatórias do passado para serem usados antes do agente decidir a jogada, servindo como parte do treino, e assim evitando enviesamentos do agente, deixando o mesmo mais robusto e mais assertivo com a proposta do jogo.
