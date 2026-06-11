@@ -2,7 +2,7 @@
 \label{cap:fundamentacao-teorica}
 \section{O jogo pôquer Texas Hold'Em}
 
-O pôquer possui várias modalidades, sendo algumas como o pôquer \textit{Head's Up}, que consiste em um contra um direto, sendo a modalidade mais famosa a \textit{Texas Hold'Em}, como falado por \citeonline{barbosa2005confiabilidade}, o pôquer é um jogo composto por muitos fatores, sendo os mais importantes para entende-lo: a hierarquia das cartas, a configuraçãoda modalidade, as combinações possíveis, as ações que o jogador pode tomar e a cronologia do jogo.
+O pôquer é um dos jogos mais populares da história, como dito por como falado por \citeonline{barbosa2005confiabilidade}, possuindo várias modalidades, sendo algumas como o pôquer \textit{Head's Up}, que consiste em um contra um direto, sendo a modalidade mais famosa a \textit{Texas Hold'Em}, o pôquer é um jogo composto por muitos fatores, sendo os mais importantes para entende-lo os seguintes:
 
 \subsection{A hierarquia das cartas}
 
@@ -30,7 +30,7 @@ sendo essa a ordem crescente dos valores das cartas do pôquer, é importante de
 
 No \textit{Texas Hold'Em} cada jogador recebe duas cartas aleatórias do baralho, que é o que chamado de ``mão'', sendo essas cartas que apenas o jogador tem acesso, enquanto isso, são distribuidas ao decorrer do jogo mais cinco cartas de forma comunitárias, as cartas comunitárias são cartas que todos os jogadores tem acesso e podem formar o jogos do pôquer.
 
-\subsection{As combinações possíveis}
+\subsection{As combinações e o desempate}
 
 O principal objetivo do pôquer é formar combinações de cinco cartas, sendo um conjunto formado pelas duas cartas da mão do jogador com as cinco cartas comunitárias, sempre descartando as duas cartas de menor valor.
 
@@ -53,8 +53,65 @@ As combinações do pôquer são as seguintes em ordem decrescente de força, se
           Ocorre quando as cinco cartas da combinação do jogador tem o mesmo naipe, o desempate é feito pela maior carta de cada jogador, caso seja a mesma, a seguinte maior carta do jogador é o desempate, assim sucessivamente até a quinta carta caso seja necessário, um \textit{flush} pode ser visto como:
 
           $$ \Ah \Kh \Qh \nineh \twoh$$
+
+    \item \textit{Straight}:
+          É a sequência de cinco cartas sem importar o naipe das cartas que a compõem, o desempate é feito pela maior sequencia, segue um exemplo de \textit{straight}:
+
+          $$ \Ac \twoh \tres \fourd \fivec$$
+    \item Trinca:
+          É uma combinação formada por três cartas de mesmo valor, o desempate é feito pela maior trinca, a trinca pode ser vista como:
+
+          $$ \trec \tred \treh \Ac \twoh$$
+    \item Dois pares:
+          Consiste no jogador formar dois pares de cartas do mesmo valor, sem importar o naipe, sendo o desempate feito pelo maior par dentre os dois pares, caso o primeiro maior par seja igual entre os jogadores, o segundo par é o quesito de desempate, um exemplo de dois pares é:
+
+          $$ \Ac \Ah \twoc \twoh \tres$$
+    \item Par:
+          É quando o jogador forma um par de duas cartas de mesmo valor, sem importar o naipe, o desempate é feito pelo maior par, segue um exemplo de par:
+
+          $$ \Qc \Qh \twoc \fourd \sevh$$
+    \item Carta alta:
+          Caso nenhum dos jogadores tenha formado nenhuma combinação, o vencedor é aquele que tiver a maior carta em sua mão, o desempate é feito comparando a maior carta dos jogadores, se for a mesma, a próxima verificada é a segunda maior, assim por diante até a quinta carta de cada um, segue um exemplo de jogo de carta alta:
+
+          $$ \Ac \twoc \fourd \sevs \Kh$$
 \end{itemize}
 
+É válido elucidar que as sequencias no pôquer tem um limite, sempre começando no ás, quando se segue do ás até o cinco, sendo a menor sequencia possível, e sempre terminam no ás, sendo a maior sequencia possivel a que vai do dez até o ás, sendo assim as sequencias não são um ciclo, são uma linha fechada.
+
+\subsection{O desempate}
+Já foi citado o desempate especifico de cada combinação acima, entretanto, em raros casos, quando dois jogadores possuem a mesma combinação, é necessário aplicar outro metodo de desempate, que é conhecido como \textit{kicker}, considerando o seguinte cenário de empate entre dois jogadores:
+
+Jogador 1 possui: \fivec \fived \twoc \twod \Ah
+
+Jogador 2 possui: \fiveh \fives \twoh \twos \fourd
+
+Nesse caso os dois jogadores possuem dois pares de mesmos valores, sendo assim, o \textit{kicker} é a maior carta fora da combinação, nesse caso sendo o ás para o jogador 1 e o quatro para o jogador 2, sendo assim, o jogador 1 possui o \textit{kicker} maior, dando a ele a vitória.
+
+\subsection{As fases de aposta}
+
+O \textit{Texas hold'Em} possui cinco fases de aposta, que são os momentos que os jogadores podem apostar suas fichas, sendo elas:
+
+\begin{itemize}
+    \item \textit{Pre-Flop}
+
+          É quando os jogadores recebem suas duas cartas privadas, sem saber quais as cartas de seus adversários, nessa fase não existem cartas comunitárias, além de ser a única fase de apostas obrigatórias, em que o jogador precisa apostar se desejar participar da rodada.
+
+    \item \textit{Flop}
+
+          São viradas três cartas comunitárias, ocorrendo mais uma rodada de apostas opcionais, que caso um dos jogadores aposte, todos os outros que quiserem se manter na rodada devem apostar tambem.
+
+    \item \textit{River}
+
+          É virada a quarta carta comunitária, seguindo a mesma lógica de apostas do \textit{flop}.
+
+    \item \textit{Turn}:
+
+          É virada a última carta comunitária, seguindo a mesma lógica de apostas das duas fases anteriores, após o \textit{turn} é executado o \textit{showdown}, que consiste nos jogadores remanescentes da rodada mostrarem sua mão para definir o vencedor.
+\end{itemize}
+
+\subsection{As ações do jogador}
+
+Dentro de cada fase de apostas, o jogador pode tomar seis ações
 
 \section{Estatística e e o espaço de estados do Texas Hold'Em}
 
