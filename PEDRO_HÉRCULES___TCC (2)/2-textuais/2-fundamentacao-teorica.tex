@@ -232,7 +232,7 @@ O método de Monte Carlo é uma classe de técnicas numéricas baseadas em amost
 
 De forma geral, o objetivo do método de Monte Carlo é aproximar uma quantidade esperada, como uma integral ou esperança matemática, por meio da média de amostras geradas aleatoriamente. Dado um vetor aleatório \(X\) com distribuição \(p(x)\) e uma função de interesse $ f(x) $, deseja-se estimar a esperança
 
-$$\mu = \mathbb{E}[f(X)] = \int f(x)\, p(x)\, dx$$
+$$\mu = \mathbb{E}[f(X)] = \int_{-\infty}^{\infty} f(x)\, p(x)\, dx$$
 
 Em muitos casos, essa integral não admite forma fechada ou é impraticável de calcular diretamente, especialmente em espaços de alta dimensão. O método de Monte Carlo substitui então essa integral pela média amostral
 $$\hat{\mu}_N = \frac{1}{N} \sum_{i=1}^{N} f(X_i)$$
@@ -282,7 +282,7 @@ Uma abordagem direta consiste em usar simulações de Monte Carlo para rotular e
       \item Calcular, para cada estado, a média dos resultados simulados (por exemplo, lucro líquido médio ou probabilidade estimada de vitória).
       \item Utilizar esses valores médios como alvos supervisionados para treinar a rede neural, minimizando uma função de perda adequada (como erro quadrático médio para valores ou entropia cruzada para probabilidades).
 \end{enumerate}
-Essa estratégia transforma o problema em um cenário de aprendizado supervisionado onde Monte Carlo fornece um ``professor estatístico'' para a rede, à semelhança do que \citeonline{sutton2018rl} discutem para métodos de Monte Carlo em aprendizado por reforço, nos quais o retorno total observado em um episódio serve como alvo para a função de valor.
+Essa estratégia transforma o problema em um cenário de aprendizado supervisionado onde Monte Carlo fornece um especialista para a rede, à semelhança do que \citeonline{sutton2018rl} discutem para métodos de Monte Carlo em aprendizado por reforço, nos quais o retorno total observado em um episódio serve como alvo para a função de valor.
 
 \subsubsection{Métodos de Monte Carlo em aprendizado por reforço}
 
@@ -306,13 +306,13 @@ A aplicação do método de Monte Carlo em pôquer associado a redes neurais env
       \item \textbf{Redução de variância}: Técnicas clássicas de redução de variância podem ser adaptadas ao contexto de pôquer, por exemplo, estratificando simulações por tipo de mão inicial ou por determinadas configurações de bordo, de modo a obter estimativas mais precisas sem necessariamente aumentar \(N\) como notado por \citeonline{rubinstein2008simulation}.
 \end{itemize}
 
-Dessa forma, o método de Monte Carlo não é apenas um componente auxiliar, mas um elemento estruturante da metodologia, fornecendo a base estatística para a estimativa de probabilidade de vitória, valor esperado de ações e retornos de aprendizado por reforço. Essa integração favorece uma abordagem reprodutível e sistemática para o desenvolvimento de uma rede neural jogadora de pôquer, alinhada com práticas consolidadas na literatura de simulação e aprendizado por reforço.
+Dessa forma, o método de Monte Carlo funciona como um elemento estruturante, fornecendo a base estatística para a estimativa de probabilidade de vitória, valor esperado de ações e retornos de aprendizado por reforço.
 
 \section{Redes neurais artificiais e Q-Learning}
 
 Uma \gls{RNA} emula o funcionamento do cerébro humano, neste aspecto, há varias formas de moldar uma \gls{RNA}, a que será citada será uma rede neural artificial perceptron multicamadas, como dito em \citeonline{bengio2017deep}, a mesma pode ser definida como uma função que mapeia um conjunto de entradas e retorna uma saída, utilizando para isso, neurônios, que servem para definir as saídas baseadas nas entradas, pesos, que são paramêtros passados para os neurônios para tomarem a melhor decisão e funções de ativação que, como o nome se refere, ativa os neurônios.
 
-O Q-Learning é um algoritmo de reforço que consiste em dar \textit{Q-Values}(valores de qualidade) para uma determinada ação da rede, considerando assim se vale ou não a pena tomar aquela decisão. O Q-Learning trabalha usando a Q-Table, que consiste em uma tabela que suas linhas são todos os estados possíveis do jogo, enquanto as colunas são todas as ações possíveis, a rede verifica o estado e confere qual ação tem o maior Q-Value e executa a devida ação.
+O Q-Learning é um algoritmo de aprendizado por reforço que associa valores de qualidade, \textit{Q-Values}, às ações disponiveis em determinado estado, de modo a estimar a melhor decisão. O Q-Learning trabalha usando a Q-Table, que consiste em uma tabela que suas linhas são todos os estados possíveis do jogo, enquanto as colunas são todas as ações possíveis, a rede verifica o estado e confere qual ação tem o maior Q-Value e executa a devida ação.
 
 Para calcular o valor ideal do Q-Value, como citado por \citeonline{mnih2015human},é utilizada a fórmula de Bellman, cuja é a seguinte:
 $$Q_{i+1}(s, a) = r + \gamma \max Q_i(s', a')$$

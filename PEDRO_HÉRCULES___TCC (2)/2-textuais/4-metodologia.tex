@@ -30,12 +30,12 @@ Por fim, a pasta \textit{Views}(visualizações) gerencia aquilo referente ao qu
 
 Um dos principais desafios para se modular as regras do poquêr são a valorização das jogadas, porém é possivel superar esse desafio usando lógica simples, dando valores de força para as jogadas, entretanto cai-se em outra barreira, os empates são ocasiões incomuns, mas que são um grande desafio de serem resolvidos usando uma simples lógica de valores para as jogadas. Mesmo que o poquêr disponha de um fator de desempate, sendo conhecido como \textit{Kicker}, que é a carta do jogador que "sobra", entretanto, em raros casos, dois ou mais jogadores podem ter a mesma categoria de jogada e Kickers iguais, sendo necessário verificar qual categoria se sobressai, para seres humanos é fácil distinguir quais pares são maiores que outros, por exemplos, mas para o computadores, se o par tem sempre peso 2, independete do valor dos pares, eles serão iguais.
 
-Para contornar isso, foi elaborado um sistema de \textit{score}(pontuação) de base 15, tomando o \textit{Ás} como valor 13, a base 15 supre todas as necessidades do sistema, garantindo que não haverão possibilidades maiores que o ás, para calcular esse score é usada a seguinte formula:
+Para contornar isso, foi elaborado um sistema de \textit{score}(pontuação) de base 15, tomando o Ás como valor 14, a base 15 supre todas as necessidades do sistema, garantindo que não haverão possibilidades maiores que o ás, para calcular esse score é usada a seguinte formula:
 
 $\text{Score} = (\text{Categoria} \cdot 15^5) + \sum_{i=1}^{5} \left( \text{Carta}_i \cdot 15^{5-i} \right)$
 
 Esta formula calcula o score multiplicando o valor da categoria da jogado por $15^5$, sucedido pela soma das 5(cinco) cartas que o jogador tem à sua disposição, cada uma multiplicada por uma exponenciação de base 15(quinze).
-A função do código que faz esse calculo se encontra no \textit{combinacaoService.js}, cuja é: 
+A função do código que faz esse calculo se encontra no \textit{combinacaoService.js}, cuja é:
 
 \newpage
 \begin{lstlisting} [language=JavaScript, caption={Função de calculo do Score}, label={cod:score}]
@@ -55,7 +55,7 @@ Para melhor compreensão do motor base 15 e de como ele é utilizado de forma re
 
 Nesse caso, o primeiro paramêtro da função \textit{calcularscore} se refere a força da categoria, no caso de Dois pares a força é 3(três), seguido pelo par maior duas vezes como pode ser notado em \textit{pares[0], pares[0]} para ocupar os multiplicadores mais fortes, sendo esses $15^4$ e $15^3$, seguido pelos dois pares menores, que consequentemente recebem os multiplicadores mais fracos, e por fim o \textit{Kicker}, que consiste nas cartas de desempate, nesse caso sendo a última carta disponivel do agente.
 
-Sendo assim, na rara ocasião que dois jogadores possuam Dois Pares cada um e o mesmo Kicker, o programa é capaz de definir o que se sobressai, dando a vitória para o jogador com a maior jogada. 
+Sendo assim, na rara ocasião que dois jogadores possuam Dois Pares cada um e o mesmo Kicker, o programa é capaz de definir o que se sobressai, dando a vitória para o jogador com a maior jogada.
 
 \section{Modelagem do agente inteligente (DQN)}
 
