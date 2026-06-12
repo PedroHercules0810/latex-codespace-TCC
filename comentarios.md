@@ -1,14 +1,14 @@
 # Comentários
 
-+ Resolver todos os itálicos para termos de língua não portuguesa
-+ Referências para todo e qualquer adjetivo. Se não conseguir tira o adjetivo;
++ Resolver todos os itálicos para termos de língua não portuguesa FEITO
++ Referências para todo e qualquer adjetivo. Se não conseguir tira o adjetivo; FEITO
 + remover construções linguísticas que antecipam algo que não será apresentado naquele momento. Ex: "não representa apenas um avanço tecnológico"; FEITO
 + "Este estudo tem como objetivo investigar, comparar e implementar essas abordagens, i": não indicar na introdução que será realizado uma comparação de métodos. APresentar que será demonstrado uma abordagem para indicar melhores tomadas de decisão para o jogo; FEITO
 + Primeira assunto da fundamentação teórica: Explicar o que é Poker. Definir nesse momento todos as palavras conteituais do jogo; FEITO
-+ Colocar o complemento das configurações possíveis de jogos no Poker;
++ Colocar o complemento das configurações possíveis de jogos no Poker; FEITO
 + Colocar uma iamgem do padrão MVC; FEITO
 + REvisar a localização IA e Aprendizagem de Máquina:  https://www.instagram.com/p/DWWw9NBEWzo/
-+ Corrigir todas as aspas
++ Corrigir todas as aspas FEITO
 + Corrigir a fórmula da esperança matemática (integral): Colocar os limites; FEITO
 + "professor estatístico” trocar por especialista (sem aspas e corrigindo a concordância); FEITO
 + (Reconstruir esse parágrafo): Dessa forma, o método de Monte Carlo não é apenas um componente auxiliar, mas um elemento estruturante da metodologia, fornecendo a base estatística para a estimativa de probabilidade de vitória, valor esperado de ações e retornos de aprendizado por reforço. Essa integração favorece uma abordagem reprodutível e sistemática para o desenvolvimento de uma rede neural jogadora de pôquer, alinhada com práticas consolidadas na literatura de simulação e aprendizado por reforço. FEITO
