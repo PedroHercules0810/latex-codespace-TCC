@@ -28,7 +28,7 @@ Por fim, a pasta \textit{Views}(visualizações) gerencia aquilo referente ao qu
 
 \subsection{Motor de avaliação - Base 15}
 
-Um dos principais desafios para se modular as regras do poquêr são a valorização das jogadas, porém é possivel superar esse desafio usando lógica simples, dando valores de força para as jogadas, entretanto cai-se em outra barreira, os empates são ocasiões incomuns, mas que são um grande desafio de serem resolvidos usando uma simples lógica de valores para as jogadas. Mesmo que o poquêr disponha de um fator de desempate, sendo conhecido como \textit{Kicker}, que é a carta do jogador que ``sobra'', entretanto, em raros casos, dois ou mais jogadores podem ter a mesma categoria de jogada e Kickers iguais, sendo necessário verificar qual categoria se sobressai, para seres humanos é fácil distinguir quais pares são maiores que outros, por exemplos, mas para o computadores, se o par tem sempre peso 2, independete do valor dos pares, eles serão iguais.
+Um dos principais desafios para se modular as regras do poquêr são a valorização das jogadas, porém é possivel superar esse desafio usando lógica simples, dando valores de força para as jogadas, entretanto cai-se em outra barreira, os empates são ocasiões incomuns, mas que são um grande desafio de serem resolvidos usando uma simples lógica de valores para as jogadas. Mesmo que o poquêr disponha do \textit{Kicker}, sendo necessário verificar qual categoria se sobressai, para seres humanos é fácil distinguir quais pares são maiores que outros, por exemplo, mas para o computadores, se o par tem sempre peso 2, independete do valor dos pares, eles serão iguais.
 
 Para contornar isso, foi elaborado um sistema de \textit{score}(pontuação) de base 15, tomando o Ás como valor 14, a base 15 supre todas as necessidades do sistema, garantindo que não haverão possibilidades maiores que o ás, para calcular esse score é usada a seguinte formula:
 
@@ -85,7 +85,7 @@ Além disso, o estado do agente é composto por 4(quatro) parâmetros, sendo ele
 
 \subsection{Espaço de ações}
 
-Levando em consideração que as apostas no \textit{Texas Hold'Em} são o fator mais importante para o jogo, é extremamente importante que o agente consiga executa-las de maneira consistente, entretanto, como no jogo tradicional as apostas tem valores extremamente imprecisos, podendo variar entre 1 até o todas as fichas disponíveis do jogador, e isso se tornaria um empecilho para o \textit{Q-Learning}, sendo assim, foi feita uma discretização das ações.
+Considerando que as apostas no \textit{Texas Hold'Em} são o fator mais importante para o jogo, é extremamente importante que o agente consiga executa-las de maneira consistente, entretanto, como no jogo tradicional as apostas tem valores extremamente imprecisos, podendo variar entre 1 até o todas as fichas disponíveis do jogador, e isso se tornaria um empecilho para o \textit{Q-Learning}, sendo assim, foi feita uma discretização das ações.
 
 Como citado anteriormente, a rede neural possui 5 neurônios de saída, que podem ser ditos como as ações que o agente toma, sendo eles os seguintes:
 \begin{itemize}
