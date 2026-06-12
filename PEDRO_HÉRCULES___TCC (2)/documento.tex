@@ -131,45 +131,46 @@
 % \setlength{\parskip}{0pt} % Space between paragraphs
 % }
 
-\begin{document}	
+\begin{document}
 
-	% Elementos pré-textuais
-	\imprimircapa
-	\imprimirfolhaderosto{}
-	\imprimirfichacatalografica{1-pre-textuais/ficha-catalografica} %  gerada pela biblioteca 
-	\imprimirfolhadeaprovacao 
-	\imprimirdedicatoria{1-pre-textuais/dedicatoria}
-	\imprimiragradecimentos{1-pre-textuais/agradecimentos}
-	\imprimirepigrafe{1-pre-textuais/epigrafe}
-	\imprimirresumo{1-pre-textuais/resumo}
-	\imprimirabstract{1-pre-textuais/abstract}
-	\renewcommand*\listfigurename{Lista de Figuras} %Se você comentar esta linha o título da lista fica: LISTA DE ILUSTRAÇÕES
-	\imprimirlistadeilustracoes
-	% \imprimirlistadetabelas
-	%\imprimirlistadequadros
-	%\imprimirlistadealgoritmos
-	%\imprimirlistadecodigosfonte
-	\imprimirlistadeabreviaturasesiglas
-	\imprimirlistadesimbolos{1-pre-textuais/lista-de-simbolos}   
-	\imprimirsumario
-	
-	\setcounter{table}{0}% Deixe este comando antes da primeira tabela.
-	
-	%Elementos textuais
-	\textual
-	\input{2-textuais/1-introducao}
-	\input{2-textuais/2-fundamentacao-teorica}
-        \input{2-textuais/3-trabalhos-relacionados}
-	\input{2-textuais/4-metodologia}
-	\input{2-textuais/5-resultados}
-	\input{2-textuais/6-conclusao}
-	
-	%Elementos pós-textuais	
- \bibliographystyle{lib/abntex2-alf}
-	\bibliography{3-pos-textuais/referencias}
-	% \imprimirglossario	
-	\imprimirindice
-    \appendix
-    \include{3-pos-textuais/apendices/apendice-a}
+% Elementos pré-textuais
+\imprimircapa
+\imprimirfolhaderosto{}
+\imprimirfichacatalografica{1-pre-textuais/ficha-catalografica} %  gerada pela biblioteca 
+\imprimirfolhadeaprovacao
+\imprimirdedicatoria{1-pre-textuais/dedicatoria}
+\imprimiragradecimentos{1-pre-textuais/agradecimentos}
+\imprimirepigrafe{1-pre-textuais/epigrafe}
+\imprimirresumo{1-pre-textuais/resumo}
+\imprimirabstract{1-pre-textuais/abstract}
+\glsaddallunused
+\renewcommand*\listfigurename{Lista de Figuras} %Se você comentar esta linha o título da lista fica: LISTA DE ILUSTRAÇÕES
+\imprimirlistadeilustracoes
+% \imprimirlistadetabelas
+%\imprimirlistadequadros
+%\imprimirlistadealgoritmos
+%\imprimirlistadecodigosfonte
+\imprimirlistadeabreviaturasesiglas
+\imprimirlistadesimbolos{1-pre-textuais/lista-de-simbolos}
+\imprimirsumario
+
+\setcounter{table}{0}% Deixe este comando antes da primeira tabela.
+
+%Elementos textuais
+\textual
+\input{2-textuais/1-introducao}
+\input{2-textuais/2-fundamentacao-teorica}
+\input{2-textuais/3-trabalhos-relacionados}
+\input{2-textuais/4-metodologia}
+\input{2-textuais/5-resultados}
+\input{2-textuais/6-conclusao}
+
+%Elementos pós-textuais	
+\bibliographystyle{lib/abntex2-alf}
+\bibliography{3-pos-textuais/referencias}
+% \imprimirglossario	
+\imprimirindice
+\appendix
+\include{3-pos-textuais/apendices/apendice-a}
 
 \end{document}
