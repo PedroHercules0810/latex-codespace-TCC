@@ -8,13 +8,13 @@ A linguagem utilizada para este trabalho foi a \textit{JavaScript}, usando os re
 
 Para desenvolvimento da Rede Neural foi utilizado o \textit{TensorFlow.js}, dispensando a necessidade de fazer uma conexão entre \textit{JavaScript} e \textit{Python} caso fosse usado apenas o \textit{TensorFlow} tradicional, sendo utilizado como referenciado por \citeonline{smilkov2019tensorflow} , tendo em vista que o \textit{TensorFlow.js} tem funções nativas de \gls{DQN}, a mesma foi a mais adequada para o trabalho.
 
-A plotação gráfica foi feita utilizando do \textit{Chart-Js-Node-Canvas}, \gls{API} que permite a criação dos gráficos, sendo utilizada para plotar o desempenho do agente, levando como parâmetro o ganho/perda de fichas, também representando a queda do $\epsilon$ (Epsilon).
+A plotação gráfica foi feita utilizando do \textit{Chart-Js-Node-Canvas}, \gls{API} que permite a criação dos gráficos, sendo utilizada para plotar o desempenho do agente, levando como parâmetro o ganho/perda de fichas, também representando a queda do $\epsilon$.
 
 \section{Arquitetura do ambiente e motor de regras}
 
 \subsection{Estrutura \texorpdfstring{\gls{MVC}}{MVC}}
-Este trabalho é todo arquitetado utilizado o padrão de arquitetura \gls{MVC}, como é possivel verificar no repositório de \citeonline{grangeiro2026poker}, a pasta \textit{Models}(Modelos) comporta as classes referentes ao \textit{Texas Hold'Em}, sendo elas a classe 'carta' que representa as cartas do baralho utilizadas no poquêr, contendo o Naipe e o Valor da carta, e a classe 'jogador' representa o agente, que contém as cartas disponiveis para o jogador, seu \textit{Stack}(Quantidade de fichas) e a ação que o jogador vai tomar.
-A pasta \textit{controllers}(Controladores) possui o controlador responsavel por gerenciar as fases de apostas, sendo elas as descritas no código como:
+Este trabalho é todo arquitetado utilizado o padrão de arquitetura \gls{MVC}, como é possivel verificar no repositório de \citeonline{grangeiro2026poker}, a pasta \textit{Models} comporta as classes referentes ao \textit{Texas Hold'Em}, sendo elas a classe ``carta'' que representa as cartas do baralho utilizadas no poquêr, contendo o Naipe e o Valor da carta, e a classe ``jogador'' representa o agente, que contém as cartas disponiveis para o jogador, seu \textit{Stack} e a ação que o jogador vai tomar.
+A pasta \textit{controllers} possui o controlador responsavel por gerenciar as fases de apostas, sendo elas as descritas no código como:
 \begin{lstlisting}[language=JavaScript, caption={Fases gerenciadas pelo jogoController.js}, label={cod:fases}]
 const fases = [
         { nome: "Pre-Flop", cartas: 0 },
@@ -23,14 +23,14 @@ const fases = [
         { nome: "River", cartas: 1 }
     ];
 \end{lstlisting}
-A pasta \textit{Services}(Serviços) vai conter toda a parte estatística e da inteligencia do agente, podendo ser considerada o cerébro das atividades do projeto, contendo todas as funções referentes ao baralho, a Inteligencia Artificial, os gráficos, as combinações e as estatisticas geradas pelo \textit{Monte Carlo}.
-Por fim, a pasta \textit{Views}(visualizações) gerencia aquilo referente ao que o usuário vê durante o processamento do programa, no caso deste trabalho, controla a barra de carregamento que pode ser vista no terminal de comandos, além como as funções responsáveis por escrever informações em um arquivo de texto e uma função responsável por escrever as cartas de maneira mais compreensivel para o usuário.
+A pasta \textit{Services} vai conter toda a parte estatística e da inteligencia do agente, podendo ser considerada o cerébro das atividades do projeto, contendo todas as funções referentes ao baralho, a Inteligencia Artificial, os gráficos, as combinações e as estatisticas geradas pelo \textit{Monte Carlo}.
+Por fim, a pasta \textit{Views} gerencia aquilo referente ao que o usuário vê durante o processamento do programa, no caso deste trabalho, controla a barra de carregamento que pode ser vista no terminal de comandos, além como as funções responsáveis por escrever informações em um arquivo de texto e uma função responsável por escrever as cartas de maneira mais compreensivel para o usuário.
 
 \subsection{Motor de avaliação - Base 15}
 
 Um dos principais desafios para se modular as regras do poquêr são a valorização das jogadas, porém é possivel superar esse desafio usando lógica simples, dando valores de força para as jogadas, entretanto cai-se em outra barreira, os empates são ocasiões incomuns, mas que são um grande desafio de serem resolvidos usando uma simples lógica de valores para as jogadas. Mesmo que o poquêr disponha do \textit{Kicker}, sendo necessário verificar qual categoria se sobressai, para seres humanos é fácil distinguir quais pares são maiores que outros, por exemplo, mas para o computadores, se o par tem sempre peso 2, independete do valor dos pares, eles serão iguais.
 
-Para contornar isso, foi elaborado um sistema de \textit{score}(pontuação) de base 15, tomando o Ás como valor 14, a base 15 supre todas as necessidades do sistema, garantindo que não haverão possibilidades maiores que o ás, para calcular esse score é usada a seguinte formula:
+Para contornar isso, foi elaborado um sistema de \textit{score}(pontuação) de base 15, tomando o Ás como valor 14, a base 15 supre todas as necessidades do sistema, garantindo que não haverão possibilidades maiores que o ás, para calcular esse \textit{score} é usada a seguinte formula:
 
 $\text{Score} = (\text{Categoria} \cdot 15^5) + \sum_{i=1}^{5} \left( \text{Carta}_i \cdot 15^{5-i} \right)$
 
@@ -55,7 +55,7 @@ Para melhor compreensão do motor base 15 e de como ele é utilizado de forma re
 
 Nesse caso, o primeiro paramêtro da função \textit{calcularscore} se refere a força da categoria, no caso de Dois pares a força é 3(três), seguido pelo par maior duas vezes como pode ser notado em \textit{pares[0], pares[0]} para ocupar os multiplicadores mais fortes, sendo esses $15^4$ e $15^3$, seguido pelos dois pares menores, que consequentemente recebem os multiplicadores mais fracos, e por fim o \textit{Kicker}, que consiste nas cartas de desempate, nesse caso sendo a última carta disponivel do agente.
 
-Sendo assim, na rara ocasião que dois jogadores possuam Dois Pares cada um e o mesmo Kicker, o programa é capaz de definir o que se sobressai, dando a vitória para o jogador com a maior jogada.
+Sendo assim, na rara ocasião que dois jogadores possuam Dois Pares cada um e o mesmo \textit{Kicker}, o programa é capaz de definir o que se sobressai, dando a vitória para o jogador com a maior jogada.
 
 \section{Modelagem do agente inteligente (\textit{DQN})}
 
