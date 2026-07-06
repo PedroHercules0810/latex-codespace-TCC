@@ -3,7 +3,7 @@
 
 \section{Abordagens baseadas em busca}
 
-Antes de redes neurais mais profundas serem amplamente utilizadas para produção de projetos envolvendo o \textit{Texas Hold'Em}, eram utilizadas abordagens mais voltadas para busca em árvore, como feito por \citeonline{kleij2010thesis} e por \citeonline{vdBroeck2009mcts}, que utilizaram o algoritmo de \textit{Monte Carlo} para explorar os estados do jogo, porém como ambos focavam majoritariamente na modelagem e busca em árvore de maneira mais bruta, enquanto este trabalho é mais focado na tomada de decisões em si, porém o \textit{Monte Carlo} é usado de forma semelhante nas fase de \textit{Pré-Flop} e de \textit{Flop} para calcular o valor de equidade.
+Antes de redes neurais mais profundas serem amplamente utilizadas para produção de projetos envolvendo o \textit{Texas Hold'Em}, eram utilizadas abordagens mais voltadas para busca em árvore, como feito por \citeonline{kleij2010thesis} e por \citeonline{vdBroeck2009mcts}, que utilizaram o algoritmo de \textit{Monte Carlo} para explorar os estados do jogo. Porém, como ambos focavam majoritariamente na modelagem e busca em árvore de maneira mais bruta, enquanto este trabalho é mais focado na tomada de decisões em si, porém o \textit{Monte Carlo} é usado de forma semelhante nas fase de \textit{Pré-Flop} e de \textit{Flop} para calcular o valor de equidade.
 
 \section{Avanço em \textit{Deep Reinforcement Learning}}
 
@@ -15,7 +15,7 @@ Também pode ser citado o artigo de \citeonline{brown2019superhuman} que desenvo
 
 \section{Diferença arquitetural}
 
-Enquanto os trabalhos citados anteriormente dispunham de um extenso maquinário para o desenvolvimento dos agentes, este trabalho se voltou mais para o fator de exploração do agente, fazendo com que o próprio aprendesse com suas próprias ações, além de utilizar modulagem de recompensa para deixar o agente mais preciso, o penalizando por fazer uma jogada desnecessariamente passiva, ou o recompensando por fazer uma jogada embasadamente agressiva, fazendo com que o jogador tenda a seguir mais fielmente a dinâmica do \textit{Texas Hold'Em}.
+Enquanto os trabalhos citados anteriormente dispunham de um extenso maquinário para o desenvolvimento dos agentes, este trabalho se voltou mais para o fator de exploração do agente, fazendo com que o mesmo aprendesse com suas próprias ações, além de utilizar modulagem de recompensa para deixar o agente mais preciso, o penalizando por fazer uma jogada desnecessariamente passiva, ou o recompensando por fazer uma jogada embasadamente agressiva, fazendo com que o jogador tenda a seguir mais fielmente a dinâmica do \textit{Texas Hold'Em}.
 
 Também pode ser citada a questão de desempate, que costuma ser resolvida por buscas em árvores complexas e mais custosas, este projeto desenvolveu um motor de base 15 capaz de efetuar os desempates de forma concisa e coerente, deixando o programa relativamente mais rápido. A linguagem utilizada para o desenvolvimento também é diferente da maioria utilizada, já que foi utilizado o \textit{JavaScript}, utilizando do \textit{TensorFlow.js} e \textit{Node.js} como uma alternativa no lugar da comumente usada \textit{Python}.
 

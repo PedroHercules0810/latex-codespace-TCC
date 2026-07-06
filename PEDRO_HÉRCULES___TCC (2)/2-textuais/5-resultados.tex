@@ -3,9 +3,9 @@
 
 \section{Validação do ambiente e do motor de regras}
 
-Tomando um ambiente em que foram executadas 10.000 simulações de mãos do \textit{Texas Hold'Em}, cada mão sendo repetida 10 vezes, o motor de base 15 executou o trabalho de maneira consistente, classificando todos os jogos de fazer os desempates de maneira correta e robusta, isso pode ser atestado observando o jogo 20 das simulações, que é o que consta no apendice-a.
+Tomando um ambiente em que foram executadas 10.000 simulações de mãos do \textit{Texas Hold'Em}, cada mão sendo repetida 10 vezes, o motor de base 15 executou o trabalho de maneira consistente, classificando todos os jogos de fazer os desempates de maneira correta e robusta. Isso pode ser atestado observando o jogo 20 das simulações, que é o que consta no Apendice-a.
 
-Esta simulação demonstra o funcionamento do motor base 15, já que o \textit{Jogador[0]} e o \textit{Jogador[2]} possuíam dois pares, porém o \textit{Jogador[0]} levou a vitória por pontuar mais, já que, seguindo a formula para o motor de desempate o \textit{jogador[0]} pontuou 2.819.809 pontos, enquanto o \textit{jogador[2]} pontuou 2.819.098, uma diferença de 711 pontos, mesmo o \textit{Jogador[2]} possuindo um kicker de Ás, porém os pares do \textit{jogador[0]} eram superiores.
+Esta simulação demonstra o funcionamento do motor base 15, já que o \textit{Jogador[0]} e o \textit{Jogador[2]} possuíam dois pares, porém o \textit{Jogador[0]} levou a vitória por pontuar mais, já que, seguindo a fórmula para o motor de desempate, o \textit{jogador[0]} pontuou 2.819.809 pontos, enquanto o \textit{jogador[2]} pontuou 2.819.098, uma diferença de 711 pontos, mesmo o \textit{Jogador[2]} possuindo um kicker de Ás, porém os pares do \textit{jogador[0]} eram superiores.
 
 \section{Evolução na taxa de exploração}
 
@@ -16,11 +16,11 @@ Esta simulação demonstra o funcionamento do motor base 15, já que o \textit{J
     \label{fig:decaimentoEpsilon}
 \end{figure}
 
-O gráfico demonstra o decaimento do fator de exploração \textit{epsilon} ($\epsilon$), sendo possível notar que a partir de por volta do jogo 500, a taxa de exploração é mínima, significando que o agente esta jogando com tudo o que aprendeu, ao invés de apenas tomar ações aleatórias.
+O gráfico demonstra o decaimento do fator de exploração \textit{epsilon} ($\epsilon$), sendo possível notar que a partir de por volta do jogo 700, a taxa de exploração é mínima, significando que o agente está jogando com tudo o que aprendeu, ao invés de apenas tomar ações aleatórias.
 
 \section{Desempenho e lucro do agente}
 
-Durantes as simulações o agente a ser observado foi o responsável pelo \textit{Jogador[0]} para facilitar o entendimento e plotação gráfica, é possível verificar o lucro ou prejuízo do agente observado no seguinte gráfico:
+Durantes as simulações, o agente a ser observado foi o responsável pelo \textit{Jogador[0]}. Para facilitar o entendimento e plotação gráfica, é possível verificar o lucro ou prejuízo do agente observado no seguinte gráfico:
 
 \begin{figure}[htbp]
     \centering
