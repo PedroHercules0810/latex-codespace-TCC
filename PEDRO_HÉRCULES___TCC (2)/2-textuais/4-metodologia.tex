@@ -4,9 +4,9 @@
 
 \section{Tecnologias e Ferramentas Utilizadas}
 
-A linguagem utilizada para este trabalho foi a \textit{JavaScript}, usando os recursos do \textit{Node.js}, já que foram executados longos \textit{loops} para simular milhares de mãos de \textit{Texas Hold'Em}. Tendo em vista que a quantidade de iterações poderia gerar travamentos na execução, as funções assíncronas do \textit{Node.js} \textit{(await/assync)} tornavam a execução do programa mais eficiente.
+A linguagem utilizada para este trabalho foi a \textit{JavaScript}, usando os recursos do \textit{Node.js}, já que foram executados longos \textit{loops} para simular dez mil mãos de \textit{Texas Hold'Em}. Tendo em vista que a quantidade de iterações poderia gerar travamentos na execução, as funções assíncronas do \textit{Node.js} \textit{(await/assync)} burlavam tais travamentos de execução.
 
-Para desenvolvimento da Rede Neural, foi utilizado o \textit{TensorFlow.js}, dispensando a necessidade de fazer uma conexão entre \textit{JavaScript} e \textit{Python} caso fosse usado apenas o \textit{TensorFlow} tradicional, sendo utilizado como referenciado por \citeonline{smilkov2019tensorflow}. Tendo em vista que o \textit{TensorFlow.js} tem funções nativas de \gls{DQN}, a mesma foi a mais adequada para o trabalho.
+Para desenvolvimento da Rede Neural, foi utilizado o \textit{TensorFlow.js}, \citeonline{smilkov2019tensorflow}. Tendo em vista que o \textit{TensorFlow.js} tem funções nativas de \gls{DQN}, a mesma foi a mais adequada para o trabalho.
 
 A plotação gráfica foi feita utilizando do \textit{Chart-Js-Node-Canvas}, \gls{API} que permite a criação dos gráficos, sendo utilizada para plotar o desempenho do agente, levando como parâmetro o ganho/perda de fichas, também representando a queda do $\epsilon$.
 
@@ -32,9 +32,9 @@ Um dos principais desafios para se modular as regras do pôquer são a valoriza�
 
 Para contornar isso, foi elaborado um sistema de \textit{score}(pontuação) de base 15, tomando o Ás como valor 14, a base 15 supre todas as necessidades do sistema, garantindo que não haverão possibilidades maiores que o ás, para calcular esse \textit{score} é usada a seguinte formula:
 
-$\text{Score} = (\text{Categoria} \cdot 15^5) + \sum_{i=1}^{5} \left( \text{Carta}_i \cdot 15^{5-i} \right)$
+$$\text{Score} = (\text{Categoria} \cdot 15^5) + \sum_{i=1}^{5} \left( \text{Carta}_i \cdot 15^{5-i} \right).$$
 
-Esta fórmula calcula o score multiplicando o valor da categoria da jogado por $15^5$, sucedido pela soma das 5(cinco) cartas que o jogador tem à sua disposição, cada uma multiplicada por uma exponenciação de base 15(quinze).
+Esta fórmula calcula o score multiplicando o valor da categoria da jogado por $15^5$, sucedido pela soma das 5 cartas que o jogador tem à sua disposição, cada uma multiplicada por uma exponenciação de base 15.
 A função do código que faz esse cálculo se encontra no \textit{combinacaoService.js}, cuja é:
 
 \newpage
@@ -55,7 +55,7 @@ Para melhor compreensão do motor base 15 e de como ele é utilizado de forma re
     }
 \end{lstlisting}
 
-Nesse caso, o primeiro paramêtro da função \textit{calcularscore} se refere a força da categoria, no caso de Dois pares a força é 3(três), seguido pelo par maior duas vezes como pode ser notado em \textit{pares[0], pares[0]} para ocupar os multiplicadores mais fortes, sendo esses $15^4$ e $15^3$, seguido pelos dois pares menores, que consequentemente recebem os multiplicadores mais fracos, e por fim o \textit{Kicker}, que consiste nas cartas de desempate, nesse caso sendo a última carta disponivel do agente.
+Nesse caso, o primeiro paramêtro da função \textit{calcularscore} se refere a força da categoria, no caso de Dois pares a força é 3, seguido pelo par maior duas vezes como pode ser notado em \textit{pares[0], pares[0]} para ocupar os multiplicadores mais fortes, sendo esses $15^4$ e $15^3$, seguido pelos dois pares menores, que consequentemente recebem os multiplicadores mais fracos, e por fim o \textit{Kicker}, que consiste nas cartas de desempate, nesse caso sendo a última carta disponivel do agente.
 
 Sendo assim, na rara ocasião que dois jogadores possuam Dois Pares cada um e o mesmo \textit{Kicker}, o programa é capaz de definir o que se sobressai, dando a vitória para o jogador com a maior jogada.
 
@@ -63,7 +63,7 @@ Sendo assim, na rara ocasião que dois jogadores possuam Dois Pares cada um e o 
 
 \subsection{Arquitetura e espaço de estados}
 
-Tendo em vista que o \textit{TensorFlow.js} foi a \gls{API} selecionada para este trabalho, o mesmo foi arquitetado com duas camadas ocultas de 16 neurônios, tal quantidade foi escolhida por meio de tentativa e erro, menos neurônios deixavam o agente impreciso, mais deixavam a execução mais lenta, sem mudar significativamente os resultados, com ativação \gls{ReLU}, que cortam quaisquer números negativos que possam entrar na rede, além de uma camada de saída com 5 neurônios de ativação linear, já que o \textit{Q-Learning} retorna um score absoluto, ao invés de uma probabilidade, tudo isso pode ser denotado no seguinte trecho do código:
+Tendo em vista que o \textit{TensorFlow.js} foi a \gls{API} selecionada para este trabalho, o mesmo foi arquitetado com duas camadas ocultas de 16 neurônios, tal quantidade foi escolhida por meio de tentativa e erro, menos neurônios deixavam o agente impreciso, mais deixavam a execução mais lenta, sem mudar significativamente os resultados, com ativação \gls{ReLU}, que cortam quaisquer números negativos que possam entrar na rede, além de uma camada de saída com 5 neurônios de ativação linear referentes as ações do agente, já que o \textit{Q-Learning} retorna um score absoluto, ao invés de uma probabilidade, tudo isso pode ser denotado no seguinte trecho do código:
 
 \begin{lstlisting}[language=JavaScript, caption={Camadas do modelo}, label={cod:camadas}]
     createModel(){
@@ -105,7 +105,7 @@ As recompensas são a principal forma de se treinar um agente por reforço. Segu
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{lib/Fluxograma das penalidades.png}
-    \caption{Fluxograma do sistema de penalidade por passividade: Autoria própria}
+    \caption{Fluxograma do sistema de penalidade por passividade - Fonte: Autoria própria}
     \label{fig:desempenhoAgente}
 \end{figure}
 
