@@ -102,20 +102,22 @@ Como citado anteriormente, a rede neural possui 5 neurônios de saída, que pode
 
 As recompensas são a principal forma de se treinar um agente por reforço. Seguindo as regras do \textit{Texas Hold'Em}, as recompensas podem ser dadas simplesmente pelo lucro ou prejuízo de fichas, entretanto apenas usar o lucro/prejuízo do agente pode encaminha-lo para ótimos locais, como dito por \citeonline{russell2010artificial}, um ótimo local é quando o agente ``descobre'' a melhor forma para o que ele aprendeu, mesmo que fuja do ótimo global, que seria a tomada de decisão ideal, no caso deste trabalho, o agente atingiu um ótimo local em que o mesmo sempre desistia de todas as mãos, assim ele não perdia fichas. Para contornar isso, foi utilizada a estratégia de \textit{Blinds}, que são apostas rotativas no \textit{Texas Hold'Em} que forçam o agente a apostar na primeira rodada, o que resolveu o ótimo local do \text{fold} na primeira fase, porém, o agente aprendeu que caso apenas desse \textit{Check}, também perderia o mínimo de fichas possiveis. Sendo assim, foi necessário a implementação de uma penalização por passividade, associado de uma bonificação por agressividade, como denonado por \citeonline{ng1999policy}, sendo feita como indicado na Figura 2:
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
     \centering
+    \caption{Fluxograma do sistema de penalidade por passividade}
     \includegraphics[width=0.5\linewidth]{lib/Fluxograma das penalidades.png}
-    \caption{Fluxograma do sistema de penalidade por passividade - Fonte: Autoria própria}
-    \label{fig:desempenhoAgente}
+
+    \small{Fonte: Autoria própria (2026)}
+    \label{fig:fluxogramaRecompensas}
 \end{figure}
+\break
 
 Como pode ser visto, caso o agente tenha um \textit{equity} superior a 60\%, o mesmo é penalizado em 20 pontos caso escolha a ação de \textit{Fold} ou de \textit{Check}, enquanto recebe uma bonificação de mais 15 quando faz uma jogada agressiva, como aumentar a aposta ou até mesmo dar \textit{all-in}.
-Sendo assim, o agente evita os ótimos locais mencionados, além de deixar o sistema de recompensas mais robusto, fazendo que o agente seja mais assertivo conforme aprende a jogar o jogo
+Sendo assim, o agente evita os ótimos locais mencionados, além de deixar o sistema de recompensas mais robusto, fazendo que o agente seja mais assertivo conforme aprende a jogar o jogo.
 
 \section{Cenários de simulação e Treinamento}
 
 \subsection{O ambiente da mesa}
-
 O ambiente foi configurado para comportar 4 agentes que fazem o papel de jogador, cada um iniciando com um \textit{Stack efetivo}(fichas inicias) de 1000 fichas, com a existência do \textit{Small Blind} e do \textit{Big Blind}, sendo apostas obrigatórias rotativas que os jogadores são obrigados a pagar quando são selecionados, cobrindo todos os jogadores da mesa.
 
 \subsection{A execução dos treinos}
@@ -128,8 +130,8 @@ Sendo usado como fator de aleatoriedade nas primeiras mãos, já que o agente n�
 
 \begin{lstlisting}[language=JavaScript, caption={Variáveis responsáveis pelo controle do epsilon}, label={cod:varEpsilom}]
         this.epsilon=1.0;
-        this.epsilonMin=0.01; 
-        this.epsilonDecay=0.995; 
+        this.epsilonMin=0.01;
+        this.epsilonDecay=0.995;
 \end{lstlisting}
 
 Tendo isso em vista, o $\epsilon$ é decrementado no fim de cada simulação da seguinte maneira:

@@ -451,7 +451,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\preambulotccgraduacao}{
-	Monografia apresentada à \imprimiries\ como requisito parcial para obtenção do título de Bacharel em \imprimirgraduacaoem. \\
+	Monografia apresentada à \imprimiries\ como requisito para obtenção do título de Bacharel em \imprimirgraduacaoem. \\
 }
 
 \newcommand{\preambulotccespecializacao}{
@@ -515,7 +515,7 @@
 		
 		\vspace{4.0cm}
 		
-		\textbf{\imprimirtitulo}
+		\imprimirtitulo
 		
 		\vfill
 		\normalsize\MakeUppercase\imprimirlocal\par	
@@ -551,7 +551,7 @@
 		% \bfseries
 		{\fontsize{12}{0} \selectfont \imprimirautor\par}
 		\vspace{4.0cm}\par
-		{\fontsize{12}{0} \selectfont \textbf{\imprimirtitulo}}
+		{\fontsize{12}{0} \selectfont \imprimirtitulo}
 	\end{center}
 	
 	\vspace{4.0cm}
@@ -601,7 +601,7 @@
 		\vspace{\onelineskip}
 	    \vspace{2cm}
 		\vspace{\onelineskip}
-		\textbf{\imprimirtitulo}
+		\imprimirtitulo
 	\end{center}
 	
 	\vspace{\onelineskip}
@@ -771,8 +771,16 @@
 \newcommand{\imprimirepigrafe}[1]{
 	\ifthenelse{\boolean{ufctex@ehqualificacao}}{}{
 	    \begin{epigrafe}[Epígrafe]
-			\input{#1} %
-			\raggedleft{(\imprimirautordaepigrafe) \par}
+			%\input{#1} %
+			%\raggedleft{(\imprimirautordaepigrafe) \par}
+            \vspace*{18cm}
+            \vfill
+            \hspace*{-2cm}
+            \hspace*{8cm}
+            \begin{minipage}{8cm}
+			 \input{#1} %
+			 \raggedleft{(\imprimirautordaepigrafe) \par}
+            \end{minipage}
 		\end{epigrafe}
 % 		\vspace*{\fill}
 % 		\vfill
@@ -787,6 +795,7 @@
 % 		\pagebreak
 	}
 }
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
