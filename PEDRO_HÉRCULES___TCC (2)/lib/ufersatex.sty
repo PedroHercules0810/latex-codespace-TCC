@@ -599,7 +599,7 @@
 	\begin{center}
 		{\imprimirautor}\par
 		\vspace{\onelineskip}
-	    \vspace{2cm}
+	    \vspace{1cm}
 		\vspace{\onelineskip}
 		\imprimirtitulo
 	\end{center}
@@ -726,6 +726,7 @@
 
 \newcommand{\imprimirdedicatoria}[1]{
 	\ifthenelse{\boolean{ufctex@ehqualificacao}}{}{
+		\begin{dedicatoria}[Dedicatória]
 		\vspace*{20cm}
 		\vfill
 		%Retira o espaço do paragrafo
@@ -735,6 +736,7 @@
 		\begin{minipage}{8cm}
 			\input{#1}
 		\end{minipage}
+	\end{dedicatoria}
 		\pagebreak
 	}
 }
